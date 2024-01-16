@@ -2,16 +2,32 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-class SupplierController
+use function Symfony\Component\String\u;
+
+class SupplierController extends AbstractController
 {
     /**
       * @Route("/")
     */
     public function homepage(): Response
     {
-        return new Response('Title: PB and Jams');
+
+        $names = [
+          ['name' => 'Dickinson', 'surname' => 'Bedoya'],  
+          ['name' => 'Anna', 'surname' => 'Gracia'],  
+          ['name' => 'Paula', 'surname' => 'Andrea'],  
+        ]; 
+
+        return $this->render(
+          'supplier/homepage.html.twig',
+          [
+            'title' => 'PB & Jams',
+            'names' => $names,
+          ]
+        );
     }
 
 

@@ -1,0 +1,12 @@
+<h1>{{ title }}</h1>
+{# COMMENT #}
+<div>
+    Names:
+    <ul>
+        {% for name in names %}
+            <li>
+                {{ name.name }} - {{ name.surname }} 
+            </li>
+        {% endfor %}
+    </ul>
+</div>
