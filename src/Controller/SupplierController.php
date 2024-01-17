@@ -15,7 +15,7 @@ class SupplierController extends AbstractController
     public function homepage(): Response
     {
 
-        $names = [
+        $suppliers = [
           ['name' => 'Dickinson', 'surname' => 'Bedoya'],  
           ['name' => 'Anna', 'surname' => 'Gracia'],  
           ['name' => 'Paula', 'surname' => 'Andrea'],  
@@ -24,8 +24,8 @@ class SupplierController extends AbstractController
         return $this->render(
           'supplier/homepage.html.twig',
           [
-            'title' => 'PB & Jams',
-            'names' => $names,
+            'title' => 'Proveedores',
+            'suppliers' => $suppliers,
           ]
         );
     }
@@ -42,6 +42,11 @@ class SupplierController extends AbstractController
         $title = 'Genere: '.str_replace('-', ' ', $slug);
       }else $title = 'All Generes';
 
-      return new Response($title);
+      return $this->render(
+        'supplier/browse.html.twig',
+        [
+          'title' => 'Buscar',
+        ]
+      );
     }
 }
