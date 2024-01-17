@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use function Symfony\Component\String\u;
 
@@ -50,5 +52,24 @@ class SupplierController extends AbstractController
           'genere' =>  $genere,
         ]
       );
+    }
+
+    /**
+      * @Route("/api/songs/{id<\d+>}",methods={"GET"})
+    */
+    public function getSupplier(int $id, LoggerInterface $logger) : Response
+    {
+        $supplier = [
+            'id' => $id,
+            'name' => 'Dickinson',
+            'url' => 'https://aqui.com',
+        ];
+
+        $logger->info('Returning API response for supplier {supplier}',[
+          'supplier' => $id,
+        ]);
+
+        return new JsonResponse($supplier);
+        //return $this->json($song);
     }
 }
