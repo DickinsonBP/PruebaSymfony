@@ -10,7 +10,7 @@ use function Symfony\Component\String\u;
 class SupplierController extends AbstractController
 {
     /**
-      * @Route("/")
+      * @Route("/", name="app_homepage")
     */
     public function homepage(): Response
     {
@@ -32,7 +32,7 @@ class SupplierController extends AbstractController
 
 
     /**
-      * @Route("/browse/{slug}")
+      * @Route("/browse/{slug}", name="app_browse")
     */
     public function browse(string $slug = null): Response
     {
@@ -42,10 +42,12 @@ class SupplierController extends AbstractController
         $title = 'Genere: '.str_replace('-', ' ', $slug);
       }else $title = 'All Generes';
 
+      $genere = $slug ? u(str_replace('-', ' ', $slug))->title(true): null;
+      
       return $this->render(
         'supplier/browse.html.twig',
         [
-          'title' => 'Buscar',
+          'genere' =>  $genere,
         ]
       );
     }
