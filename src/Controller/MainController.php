@@ -11,9 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
-// use Psr\Log\LoggerInterface;
-// use Symfony\Component\HttpFoundation\JsonResponse;
-// use function Symfony\Component\String\u;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 class MainController extends AbstractController
@@ -62,5 +61,49 @@ class MainController extends AbstractController
           'title' => 'Nuevo proveedor',
           'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/edit/{id}", name="app_editprovider")
+     *
+     * @ParamConverter("provider", class="App\Entity\Provider")
+     *
+     * @return Response
+     */
+    public function editBlog(Provider $provider, Request $request, EntityManagerInterface $entityManager)
+    {
+        $form = $this->createForm(ProviderFormType::class, $provider);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $provider = $form->getData();
+
+            $entityManager->persist($provider);
+            $entityManager->flush();
+            $this->addFlash('success', 'Se ha editado el proveedor!');
+            return $this->redirectToRoute('app_index');
+        }
+
+        return $this->render('provider/create.html.twig', [
+            'title'=> 'Editar proveedor',
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="app_providerdelete")
+     *
+     * @param Provider $provider
+     * @param EntityManagerInterface $em
+     *
+     * @return RedirectResponse
+     */
+    public function deleteProvider(Provider $provider, EntityManagerInterface $em): RedirectResponse
+    {
+        $em->remove($provider);
+        $em->flush();
+        $this->addFlash('success', 'Proveedor eliminado!');
+
+        return $this->redirectToRoute('app_index');
     }
 }

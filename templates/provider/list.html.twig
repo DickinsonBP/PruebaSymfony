@@ -21,7 +21,7 @@
                     <th>Telefono</th>
                     <th>Tipo de proveedor</th>
                     <th>Activo</th>
-                    <th>Editar</th>
+                    <th>Editar o Borrar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,7 +34,8 @@
                         <td>{{ provider.getProviderType() }}</td>
                         <td>{{ provider.getActive() ? 'Si' : 'No' }}</td>
                         <td>
-                            <button class="btn btn-primary">Editar</button>
+                            <a href="{{ path('app_editprovider', {id: provider.id}) }}" class="btn btn-primary">Editar</a>
+                            <a href="{{ path('app_providerdelete', {id: provider.id}) }}" onclick="return confirm('Estas seguro?');" class="btn btn-danger">BORRAR</a>
                         </td>
                     </tr>
                 {% endfor %}
