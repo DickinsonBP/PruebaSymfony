@@ -14,10 +14,11 @@ class ProviderFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', TextType::class, ['attr' => ['class' => 'form-control']]);
-        $builder->add('email', TextType::class, ['attr' => ['class' => 'form-control']]);
-        $builder->add('phone', TextType::class, ['attr' => ['class' => 'form-control']]);
+        $builder->add('name', TextType::class, ['label'=>'Nombre','attr' => ['class' => 'form-control']]);
+        $builder->add('email', TextType::class, ['label'=>'Email', 'attr' => ['class' => 'form-control']]);
+        $builder->add('phone', TextType::class, ['label'=>'Telefono', 'attr' => ['class' => 'form-control']]);
         $builder->add('provider_type', ChoiceType::class, [
+            'label' =>'Tipo de proveedor',
             'attr' => ['class' => 'form-control'],
             'choices' => [
                 'Hotel' => 'hotel',
@@ -26,6 +27,7 @@ class ProviderFormType extends AbstractType
                 ]
             ]);
         $builder->add('active', ChoiceType::class, [
+            'label' => 'Activo?',
             'attr' => ['class' => 'form-control'],
             'choices' => [
                 'Si' => true,

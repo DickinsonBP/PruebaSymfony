@@ -32,13 +32,14 @@ class MainController extends AbstractController
           'provider/list.html.twig', 
           [
             'title' => 'Proveedores',
+            'btn_create' => 'Nuevo proveedor',
             'providers' => $providerRepository->findAll()
           ]
       );
     }
 
     /**
-     * @Route("/create")
+     * @Route("/create", name="app_create_provider")
      * 
      * @param Request $request
      *
@@ -53,12 +54,13 @@ class MainController extends AbstractController
             $provider = $form->getData();
             $entityManager->persist($provider);
             $entityManager->flush();
-            $this->addFlash('success', 'New provider created!');
+            $this->addFlash('success', 'Nuevo proveedor creado!');
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render('provider/create.html.twig', [
-            'title' => 'Nuevo proveedor',
-            'form' => $form->createView()
+          'title' => 'Nuevo proveedor',
+          'form' => $form->createView()
         ]);
     }
 }
