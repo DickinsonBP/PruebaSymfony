@@ -10,10 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Provider
 {
-    public const TIPO_HOTEL = 'hotel';
-    public const TIPO_PISTA = 'pista';
-    public const TIPO_COMPLEMENTO = 'complemento';
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

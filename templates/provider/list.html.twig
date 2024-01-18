@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-8 align-center">
+            <h1>{{ title }}</h1>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+
+                <tr>
+                    {# <th>Identificador</th> #}
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                    <th>Tipo de proveedor</th>
+                    <th>Activo</th>
+                    <th>Editar</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for provider in providers %}
+                    <tr>
+                        {# <td>{{ provider.id }}</td> #}
+                        <td>{{ provider.name }}</td>
+                        <td>{{ provider.email }}</td>
+                        <td>{{ provider.phone }}</td>
+                        <td>{{ provider.getProviderType() }}</td>
+                        <td>{{ provider.getActive() ? 'Si' : 'No' }}</td>
+                        <td>
+                            <button class="btn btn-primary">Editar</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+{% endblock %}
