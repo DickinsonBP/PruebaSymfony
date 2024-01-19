@@ -1,5 +1,10 @@
 # PruebaSimfony
 ## Proyecto para Viajes para ti
+### ¿Que realiza la aplicación?
+- Muestra los proveedores que hay en la base de datos con su informacion (Nombre, Email, Telefono, Tipo de proveedor, Activo)
+- Crea un nuevo proveedor en la base de datos
+- Edita un proveedor
+- Elimina un proveedor
 ### Versiones
 - php 8.3.1
 - Symfony 4.4.51
