@@ -70,7 +70,7 @@ class MainController extends AbstractController
      *
      * @return Response
      */
-    public function editBlog(Provider $provider, Request $request, EntityManagerInterface $entityManager)
+    public function editProvider(Provider $provider, Request $request, EntityManagerInterface $entityManager)
     {
         $form = $this->createForm(ProviderFormType::class, $provider);
 
